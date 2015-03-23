@@ -512,8 +512,9 @@ function castGroupMarkOfTheWild(pet)
 				end
 			end
 		end
+		return false
 	end
-	return false
+	return true
 end
 
 -- Will cast the spell if it is not on your target, if it is on your target or it can not be cast on your target, then it will cast on yourself if it is not on you.
@@ -709,8 +710,9 @@ function castGroupThorns(pet)
 				end
 			end
 		end
+		return false
 	end
-	return false
+	return true
 end
 
 -- Will cast the spell if it is not on your target, if it is on your target or it can not be cast on your target, then it will cast on yourself if it is not on you.
