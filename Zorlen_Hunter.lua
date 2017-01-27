@@ -266,7 +266,7 @@ function Zorlen_Hunter_OnEvent_CHAT_MSG_COMBAT_CREATURE_VS_SELF_MISSES(arg1, arg
 		if not ZorlenInitialized then
 			Zorlen_CheckVariables()
 		elseif (not ZorlenConfig[ZORLEN_ZPN][ZORLEN_ZDS]) then
-			PlaySound("LEVELUPSOUND")
+			PlaySoundFile("Interface\\AddOns\\Zorlen\\dodge.wav")
 		end
 	end
 end
