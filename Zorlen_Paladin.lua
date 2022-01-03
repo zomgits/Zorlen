@@ -261,7 +261,7 @@ end
 
 --Added by Nosrac
 function isSealActive()
-	if isSealOfCommandActive() or isSealOfJusticeActive() or isSealOfLightActive() or isSealofRighteousnessActive() or isSealOfWisdomActive() or isSealOfTheCrusaderActive() then
+	if isSealOfCommandActive() or isSealOfJusticeActive() or isSealOfLightActive() or isSealOfRighteousnessActive() or isSealOfWisdomActive() or isSealOfTheCrusaderActive() then
 		return true
 	end
 	return false
