@@ -348,3 +348,16 @@ end
 function castMaxFlashOfLight(RankAdj, unit)
   return castFlashOfLight("maximum", RankAdj, unit)
 end
+
+--Added by zomg for Turtle WoW's custom Paladin spell, Holy Strike
+--Holy Strike is like Heroic Strike, but costs mana and does holy damage.
+function castHolyStrike(test)
+	local SpellName = "Holy Strike" --TODO: LOCALIZATION_ZORLEN_HolyStrike
+	local ManaNeeded = 20 -- does this rank up?
+	if not Zorlen_Button[SpellName] then
+		if not Zorlen_isMainHandEquipped() then
+			return false
+		end
+	end
+	return Zorlen_CastCommonRegisteredSpell(nil, SpellName, nil, nil, ManaNeeded, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, test)
+end
