@@ -919,9 +919,10 @@ end
 
 --Aded by Jayphen
 --edited by BigRedBrent
-function castClip(SpellRank)
+--edited by zomg to take refresh argument that applies clip even if already applied
+function castClip(SpellRank, refresh)
 	local SpellName = LOCALIZATION_ZORLEN_WingClip
-	local DebuffName = SpellName
+	local DebuffName = (not refresh) and SpellName or nil
 	local DebuffImmune = Zorlen_IsTimer(SpellName, "immune", "InternalZorlenMiscTimer")
 	local r = SpellRank or Zorlen_GetSpellRank(SpellName)
 	local mana = UnitMana("player")
@@ -1353,4 +1354,10 @@ function castCallAndDismissPet()
 	else
 		CastSpellByName(LOCALIZATION_ZORLEN_CallPet)
 	end
+end
+
+--added by zomg
+function cancelCheetah()
+	local SpellName = LOCALIZATION_ZORLEN_AspectOfTheCheetah
+	return Zorlen_CancelSelfBuffByName(SpellName)
 end

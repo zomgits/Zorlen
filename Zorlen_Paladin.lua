@@ -261,7 +261,7 @@ end
 
 --Added by Nosrac
 function isSealActive()
-	if isSealOfCommandActive() or isSealOfJusticeActive() or isSealOfLightActive() or isSealofRighteousnessActive() or isSealOfWisdomActive() or isSealOfTheCrusaderActive() then
+	if isSealOfCommandActive() or isSealOfJusticeActive() or isSealOfLightActive() or isSealOfRighteousnessActive() or isSealOfWisdomActive() or isSealOfTheCrusaderActive() then
 		return true
 	end
 	return false
@@ -348,6 +348,88 @@ end
 function castMaxFlashOfLight(RankAdj, unit)
   return castFlashOfLight("maximum", RankAdj, unit)
 end
+
+--Added by zomg
+--This will try to heal party or raid members as long as you are not targeting a party or raid member that can be healed by the spell.
+--I made it give priority to your current target so that you have the option to choose priority in the heat of battle.
+--If you want it to always select for you then just clear your target or target an enemy before using the function.
+function castGroupHolyLight(pet, Mode, RankAdj)
+	if Zorlen_isMoving() then
+		return false
+	end
+	local SpellName = LOCALIZATION_ZORLEN_HolyLight
+	if UnitExists("target") and castHolyLight(Mode, RankAdj, "target") then
+		return true
+	else
+		local u = nil
+		local counter = 1
+		local notunitarray = {}
+		if Zorlen_isCasting(SpellName) or Zorlen_isCasting(LOCALIZATION_ZORLEN_FlashOfLight) then
+			u = Zorlen_GiveGroupUnitWithLowestHealth(pet, 0, nil, Zorlen_CastingNotUnitArray)
+			if u and Zorlen_CastingUnit == u then
+				return false
+			elseif not u or Zorlen_CastingUnit then
+				SpellStopCasting()
+				return true
+			end
+			return false
+		elseif Zorlen_checkCooldownByName(SpellName) then
+			while counter do
+				u = Zorlen_GiveGroupUnitWithLowestHealth(pet, nil, nil, notunitarray)
+				if u then
+					if UnitIsUnit("target", u) then
+						notunitarray[counter] = u
+					elseif UnitIsUnit("player", u) then
+						return castHolyLight(Mode, RankAdj, u)
+					else
+						TargetUnit(u)
+						if castHolyLight(Mode, RankAdj, u) then
+							Zorlen_CastingUnit = u
+							Zorlen_CastingNotUnitArray = notunitarray
+							TargetLastTarget()
+							return true
+						end
+						TargetLastTarget()
+						notunitarray[counter] = u
+					end
+					counter = counter + 1
+				else
+					counter = nil
+				end
+				if not u and (Zorlen_isCasting(SpellName) or Zorlen_isCasting(LOCALIZATION_ZORLEN_FlashOfLight)) then
+					SpellStopCasting()
+				end
+			end
+		end
+	end
+	return false
+end
+
+function castUnderGroupHolyLight(pet, RankAdj)
+	local DefaultAdj = RankAdj or -1
+	return castGroupHolyLight(pet, "under", DefaultAdj)
+end
+
+function castOverGroupHolyLight(pet, RankAdj)
+	local DefaultAdj = RankAdj or 1
+	return castGroupHolyLight(pet, "over", DefaultAdj)
+end
+
+function castMaxGroupHolyLight(pet, RankAdj)
+	return castGroupHolyLight(pet, "maximum", RankAdj)
+end
+
+--Added by zomg
+function castJudgement(SpellRank)
+	local SpellName = "Judgement" -- TODO: LOCALIZATION_ZORLEN_Judgement
+	return Zorlen_CastCommonRegisteredSpell(SpellRank, SpellName)
+end
+
+--Added by zomg
+isSoRActive = isSealOfRighteousnessActive
+isSoCActive = isSealOfTheCrusaderActive
+isSoCoActive = isSealOfCommandActive
+isBoWActive = isBlessingOfWisdomActive
 
 --Added by zomg for Turtle WoW's custom Paladin spell, Holy Strike
 --Holy Strike is like Heroic Strike, but costs mana and does holy damage.
