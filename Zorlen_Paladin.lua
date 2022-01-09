@@ -291,3 +291,60 @@ function isRighteousFuryActive()
 	return Zorlen_checkBuffByName(SpellName)
 end
 
+--Added by zomg
+function castHolyLight(Mode, RankAdj, unit)
+  local SpellName = LOCALIZATION_ZORLEN_HolyLight
+  local SpellButton = Zorlen_Button[SpellName]
+  local LevelLearnedArray={1,6,14,22,30,38,46,54,60}
+  local ManaArray={35,60,110,190,275,365,465,580,660}
+  local MinHealArray={39,76,159,310,491,698,945,1246,1590}
+  local MaxHealArray={48,91,188,357,554,781,1054,1389,1771}
+  local TimeArray={2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5}
+  return Zorlen_CastHealingSpell(SpellName, ManaArray, MinHealArray, MaxHealArray, TimeArray, LevelLearnedArray, Mode, RankAdj, unit, SpellButton)
+end
+
+--Added by zomg
+function castUnderHolyLight(RankAdj, unit)
+  local DefaultAdj = RankAdj or -1
+  return castHolyLight("under", DefaultAdj, unit)
+end
+
+--Added by zomg
+function castOverHolyLight(RankAdj, unit)
+  local DefaultAdj = RankAdj or 1
+  return castHolyLight("over", DefaultAdj, unit)
+end
+
+--Added by zomg
+function castMaxHolyLight(RankAdj, unit)
+  return castHolyLight("maximum", RankAdj, unit)
+end
+
+--Added by zomg
+function castFlashOfLight(Mode, RankAdj, unit)
+  local SpellName = LOCALIZATION_ZORLEN_FlashOfLight
+  local SpellButton = Zorlen_Button[SpellName]
+  local LevelLearnedArray={20,26,34,42,50,58}
+  local ManaArray={35,50,70,90,115,140}
+  local MinHealArray={62,96,145,197,267,343}
+  local MaxHealArray={73,111,164,222,300,384}
+  local TimeArray={1.5,1.5,1.5,1.5,1.5,1.5}
+  return Zorlen_CastHealingSpell(SpellName, ManaArray, MinHealArray, MaxHealArray, TimeArray, LevelLearnedArray, Mode, RankAdj, unit, SpellButton)
+end
+
+--Added by zomg
+function castUnderFlashOfLight(RankAdj, unit)
+  local DefaultAdj = RankAdj or -1
+  return castFlashOfLight("under", DefaultAdj, unit)
+end
+
+--Added by zomg
+function castOverFlashOfLight(RankAdj, unit)
+  local DefaultAdj = RankAdj or 1
+  return castFlashOfLight("over", DefaultAdj, unit)
+end
+
+--Added by zomg
+function castMaxFlashOfLight(RankAdj, unit)
+  return castFlashOfLight("maximum", RankAdj, unit)
+end
