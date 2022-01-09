@@ -1354,3 +1354,9 @@ function castCallAndDismissPet()
 		CastSpellByName(LOCALIZATION_ZORLEN_CallPet)
 	end
 end
+
+--added by zomg
+function cancelCheetah()
+	local SpellName = LOCALIZATION_ZORLEN_AspectOfTheCheetah
+	return Zorlen_CancelSelfBuffByName(SpellName)
+end
