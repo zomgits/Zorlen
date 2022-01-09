@@ -418,3 +418,15 @@ end
 function castMaxGroupHolyLight(pet, RankAdj)
 	return castGroupHolyLight(pet, "maximum", RankAdj)
 end
+
+--Added by zomg
+function castJudgement(SpellRank)
+	local SpellName = "Judgement" -- TODO: LOCALIZATION_ZORLEN_Judgement
+	return Zorlen_CastCommonRegisteredSpell(SpellRank, SpellName)
+end
+
+--Added by zomg
+isSoRActive = isSealOfRighteousnessActive
+isSoCActive = isSealOfTheCrusaderActive
+isSoCoActive = isSealOfCommandActive
+isBoWActive = isBlessingOfWisdomActive
