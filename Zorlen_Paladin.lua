@@ -430,3 +430,4 @@ isSoRActive = isSealOfRighteousnessActive
 isSoCActive = isSealOfTheCrusaderActive
 isSoCoActive = isSealOfCommandActive
 isBoWActive = isBlessingOfWisdomActive
+isBoMActive = isBlessingOfMightActive
