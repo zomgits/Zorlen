@@ -430,6 +430,7 @@ isSoRActive = isSealOfRighteousnessActive
 isSoCActive = isSealOfTheCrusaderActive
 isSoCoActive = isSealOfCommandActive
 isBoWActive = isBlessingOfWisdomActive
+isBoMActive = isBlessingOfMightActive
 
 --Added by zomg for Turtle WoW's custom Paladin spell, Holy Strike
 --Holy Strike is like Heroic Strike, but costs mana and does holy damage.
